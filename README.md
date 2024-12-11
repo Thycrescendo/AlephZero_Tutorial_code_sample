@@ -1,23 +1,23 @@
-# Front-end App: Smart Contract Interaction with Aleph Zero
+# フロントエンドアプリ: Aleph Zeroとスマートコントラクトの連携
 
-Learn how to query a contract's state and send signed transactions in your front-end application.
+フロントエンドアプリケーションでコントラクトの状態をクエリし、署名済みトランザクションを送信する方法を学びましょう。
 
-## Introduction
+## はじめに
 
-In this tutorial, you will learn how to make the front-end of your application interact with smart contracts using `@polkadot/api-contract`. Specifically, you will learn:
+このチュートリアルでは、`@polkadot/api-contract`を使用して、アプリケーションのフロントエンドがスマートコントラクトと連携する方法を学びます。具体的には、次のことを学びます:
 
-- How to read values stored in your smart contract.
-- How to send signed transactions to your smart contract.
+- スマートコントラクトに格納された値を読み取る方法
+- スマートコントラクトに署名済みトランザクションを送信する方法
 
-Before starting, consider checking out the [Bulletin Board Example repository](https://github.com/alephzero/bulletin-board-example). It provides a comprehensive example dApp that can be used to learn more about writing smart contracts in Ink! and building your first dApp on the Aleph Zero ecosystem. All the code snippets in this tutorial are derived from this repository.
+開始する前に、[Bulletin Board Example リポジトリ](https://github.com/alephzero/bulletin-board-example)をチェックしてみてください。Ink!でのスマートコントラクトの作成や、Aleph Zeroエコシステムでの最初のdAppの構築について学ぶための包括的な例dAppが提供されています。このチュートリアルのすべてのコードスニペットは、このリポジトリから派生しています。
 
-Additionally, the [Aleph Zero Signer Integration tutorial](https://alephzero.org/docs/signer-integration-tutorial) may be a useful starting point.
+さらに、[Aleph Zero Signer Integration チュートリアル](https://alephzero.org/docs/signer-integration-tutorial)も参考になるかもしれません。
 
-## Connecting to a Deployed Smart Contract
+## デプロイされたスマートコントラクトへの接続
 
-To interact with the blockchain, you need to connect to a node running as part of the network. Using public Aleph Zero endpoints, you connect to a single endpoint that serves as an umbrella for multiple nodes run by the Aleph Zero Foundation, which will automatically choose the best endpoint.
+ブロックチェーンと連携するには、ネットワークの一部として実行されているノードに接続する必要があります。Aleph Zeroのパブリックエンドポイントを使用することで、Aleph Zero財団によって運営されている複数のノードの傘として機能する単一のエンドポイントに接続し、最適なエンドポイントを自動的に選択できます。
 
-The first step is to create an API instance to connect to a running node using a provider. The default `WsProvider` connects to `ws://127.0.0.1:9944`, typically your local node's endpoint. For Aleph Zero Testnet, use `wss://ws.test.azero.dev` and for Aleph Zero Mainnet, use `wss://ws.azero.dev`.
+最初のステップは、プロバイダーを使用して実行中のノードに接続するためのAPIインスタンスを作成することです。デフォルトの`WsProvider`は通常、ローカルノードのエンドポイントである`ws://127.0.0.1:9944`に接続します。Aleph Zero Testnetの場合は`wss://ws.test.azero.dev`、Aleph Zero Mainnetの場合は`wss://ws.azero.dev`を使用します。
 
 ```javascript
 import { ApiPromise, WsProvider } from '@polkadot/api';
@@ -25,3 +25,4 @@ import { ApiPromise, WsProvider } from '@polkadot/api';
 const APP_PROVIDER_URL = "ws://127.0.0.1:9944";
 const wsProvider = new WsProvider(APP_PROVIDER_URL);
 const api = await ApiPromise.create({ provider: wsProvider });
+```
